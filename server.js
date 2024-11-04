@@ -7,6 +7,7 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
+const escapeHtml = require('escape-html');
 const app = express();
 const port = 3000;
 let texto = "";
@@ -51,7 +52,7 @@ app.get('/grab', (req, res) => { // captura los datos enviados por el cliente
     
     
     if(data){
-        texto += data + "\n";
+        texto += escapeHtml(data) + "\n";
         res.send('Datos guardados correctamente.');
     } else {
         res.status(400).send('No se proporcionó ningún dato.');
